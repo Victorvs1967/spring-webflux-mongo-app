@@ -29,8 +29,7 @@ public class ProductHandle {
   }
 
   public Mono<ServerResponse> getProduct(ServerRequest request) {
-    String id = request.pathVariable("id");
-    Mono<Product> product = productRepository.findById(id);
+    Mono<Product> product = productRepository.findById(request.pathVariable("id"));
     return ServerResponse
             .ok()
             .contentType(APPLICATION_JSON)
@@ -46,8 +45,7 @@ public class ProductHandle {
   }
 
   public Mono<ServerResponse> deleteProduct(ServerRequest request) {
-    String id = request.pathVariable("id");
-    Mono<Product> product = productRepository.findById(id);
+    Mono<Product> product = productRepository.findById(request.pathVariable("id"));
     return ServerResponse
             .ok()
             .contentType(APPLICATION_JSON)
