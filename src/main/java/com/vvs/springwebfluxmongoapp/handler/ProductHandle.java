@@ -1,6 +1,5 @@
 package com.vvs.springwebfluxmongoapp.handler;
 
-import com.vvs.springwebfluxmongoapp.dto.ProductDto;
 import com.vvs.springwebfluxmongoapp.model.Product;
 import com.vvs.springwebfluxmongoapp.repository.ProductRepository;
 
@@ -53,7 +52,7 @@ public class ProductHandle {
   }
 
   public Mono<ServerResponse> updateProduct(ServerRequest request) {
-    Mono<ProductDto> productDto = request.bodyToMono(ProductDto.class);
+    Mono<Product> productDto = request.bodyToMono(Product.class);
     return ServerResponse
             .ok()
             .contentType(APPLICATION_JSON)
@@ -74,12 +73,12 @@ public class ProductHandle {
     });
   }
 
-  private Mono<Product> update(ProductDto productDto) {
+  private Mono<Product> update(Product productReq) {
     return Mono.fromSupplier(() -> {
       Product product = new Product();
-      product.setId(productDto.getId());
-      product.setName(productDto.getName());
-      product.setPrice(productDto.getPrice());
+      product.setId(productReq.getId());
+      product.setName(productReq.getName());
+      product.setPrice(productReq.getPrice());
       productRepository.save(product).subscribe();
       return product;
     });
