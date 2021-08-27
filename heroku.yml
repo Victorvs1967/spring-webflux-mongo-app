@@ -1,0 +1,8 @@
+build:
+  docker:
+    api_service: Dockerfile
+run:
+  worker:
+    command:
+      - docker pull mongo:latest
+    image: mongo_db
